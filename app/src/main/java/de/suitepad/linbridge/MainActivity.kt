@@ -85,11 +85,7 @@ class MainActivity : AppCompatActivity(), LogCatcher.LogListener {
                     dialog.dismiss()
                 }.setPositiveButton("send") { dialog, which ->
                     GlobalScope.launch(Dispatchers.Main) {
-                        LogsExportHelper(SendGrid(BuildConfig.SENDGRID_API_KEY)).also {
-                            it.logs = cachedLog
-                            it.hotelName = view.hotelName.text.toString()
-                            it.description = view.logsDescription.text.toString()
-                        }.sendIt()
+
                         Toast.makeText(this@MainActivity, "logs successfully uploaded", Toast.LENGTH_LONG).show()
                     }.start()
                     dialog.dismiss()

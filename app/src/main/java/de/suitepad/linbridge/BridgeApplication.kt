@@ -2,7 +2,6 @@ package de.suitepad.linbridge
 
 import android.app.Application
 import android.util.Log
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.HiltAndroidApp
 import de.suitepad.linbridge.logger.LogCatcher
 import timber.log.Timber
@@ -26,10 +25,7 @@ class BridgeApplication : Application() {
     private inner class CrashlyticsTimberTree : Timber.Tree() {
 
         override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
-            FirebaseCrashlytics.getInstance().log(message)
-            if (t != null) {
-                FirebaseCrashlytics.getInstance().recordException(t)
-            }
+
         }
 
         override fun isLoggable(tag: String?, priority: Int): Boolean {

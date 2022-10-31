@@ -11,7 +11,7 @@ import android.os.Build
 import android.os.IBinder
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+
 import dagger.hilt.android.AndroidEntryPoint
 import de.suitepad.linbridge.api.AudioConfiguration
 import de.suitepad.linbridge.api.ILinbridgeListener
@@ -119,11 +119,9 @@ class BridgeService : Service(), IBridgeService {
             credentials.username == null ||
             credentials.password == null
         ) {
-            FirebaseCrashlytics.getInstance().setCustomKey("credentials", "None")
             linphoneManager.clearCredentials()
             return
         } else {
-            FirebaseCrashlytics.getInstance().setCustomKey("credentials", "sip:${credentials.username}@${credentials.host}")
             linphoneManager.authenticate(
                 credentials.host,
                 if (credentials.port == 0) 5060 else credentials.port,
@@ -209,7 +207,7 @@ class BridgeService : Service(), IBridgeService {
 
     override fun setUserId(id: String?) {
         if (id != null) {
-            FirebaseCrashlytics.getInstance().setUserId(id)
+
         }
     }
 
